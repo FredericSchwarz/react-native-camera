@@ -425,4 +425,26 @@ public class CameraModule extends ReactContextBaseJavaModule {
       }
       promise.resolve(false);
   }
+
+  @ReactMethod
+  public void setFocusArea(final float x, final float y, final int viewTag) {
+    final ReactApplicationContext context = getReactApplicationContext();
+    UIManagerModule uiManager = context.getNativeModule(UIManagerModule.class);
+    uiManager.addUIBlock(new UIBlock() {
+        @Override
+        public void execute(NativeViewHierarchyManager nativeViewHierarchyManager) {
+            final RNCameraView cameraView;
+
+            try {
+                cameraView = (RNCameraView) nativeViewHierarchyManager.resolveView(viewTag);
+
+                if (cameraView.isCameraOpened()) {
+                    cameraView.setAutoFocusPointOfInterest(x, y);
+                }
+            } catch (Exception e) {
+                Log.e("rnCameraModule::", "setFocusArea: Expected a Camera component");
+            }
+        }
+    });
+  }
 }

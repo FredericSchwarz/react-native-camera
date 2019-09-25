@@ -150,6 +150,8 @@ export interface RNCameraProps {
   }): void;
   onMountError?(error: { message: string }): void;
 
+  setFocusArea(x: number, y: number): void;
+
   /** Value: float from 0 to 1.0 */
   zoom?: number;
   /** Value: float from 0 to 1.0 */
@@ -407,6 +409,8 @@ export class RNCamera extends Component<RNCameraProps & ViewProperties> {
   pausePreview(): void;
   resumePreview(): void;
   getAvailablePictureSizes(): Promise<string[]>;
+
+  setFocusArea(x: number, y: number): void;
 
   /** Android only */
   getSupportedRatiosAsync(): Promise<string[]>;

@@ -738,6 +738,10 @@ export default class Camera extends React.Component<PropsType, StateType> {
     return isAuthorized ? CameraStatus.READY : CameraStatus.NOT_AUTHORIZED;
   };
 
+  async setFocusArea(x: number, y: number) {
+    CameraManager.setFocusArea(x, y, this._cameraHandle);
+  }
+
   // FaCC = Function as Child Component;
   hasFaCC = (): * => typeof this.props.children === 'function';
 
